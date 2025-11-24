@@ -29,17 +29,9 @@ jobs:
       - name: Check folders
         run: dir
 
-      # 5️⃣ Build exe con PyInstaller (inclusione di templates, static e librerie)
+      # 5️⃣ Build exe con PyInstaller (tutto su una riga)
       - name: Build exe with PyInstaller
-        run: |
-          pyinstaller --noconfirm --onefile --console \
-          --add-data "templates;templates" \
-          --add-data "static;static" \
-          --collect-all flask \
-          --collect-all spleeter \
-          --collect-all numpy \
-          --collect-all librosa \
-          server.py --name MixAI_EQ_GUI
+        run: pyinstaller --noconfirm --onefile --console --add-data "templates;templates" --add-data "static;static" --collect-all flask --collect-all spleeter --collect-all numpy --collect-all librosa server.py --name MixAI_EQ_GUI
 
       # 6️⃣ Verifica contenuto dist
       - name: List dist folder
