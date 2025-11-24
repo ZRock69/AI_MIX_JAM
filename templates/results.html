@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Results - Mix AI EQ GUI</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+<h2>Results for {{ result['mix_file'] }}</h2>
+{% for stem, data in result['stems'].items() %}
+  <h4>{{ stem|capitalize }}</h4>
+  <table class="table table-bordered table-sm">
+    <thead class="table-dark">
+      <tr><th>Type</th><th>Freq</th><th>dB</th><th>Q</th><th>Reason</th></tr>
+    </thead>
+    <tbody>
+    {% for sug in data['suggestions'] %}
+      <tr class="{% if sug['type']=='BOOST' %}table-success{% elif sug['type']=='CUT' %}table-danger{% elif sug['type']=='UNMASK' %}table-warning{% elif sug['type']=='HPF' %}table-primary{% endif %}">
+        <td>{{sug['type']}}</td>
+        <td>{{sug.get('freq','')}}</td>
+        <td>{{sug.get('db','')}}</td>
+        <td>{{sug.get('q','')}}</td>
+        <td>{{sug['reason']}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+<a href="/" class="btn btn-secondary mt-3">Analyze another mix</a>
+</body>
+</html>
