@@ -31,7 +31,7 @@ jobs:
 
       # 5️⃣ Build exe con PyInstaller (tutto su una riga)
       - name: Build exe with PyInstaller
-        run: pyinstaller --noconfirm --onefile --console --add-data "templates;templates" --add-data "static;static" --collect-all flask --collect-all spleeter --collect-all librosa --collect-all numpy --hidden-import flask --hidden-import werkzeug --hidden-import jinja2 --hidden-import markupsafe server.py --name MixAI_EQ_GUI
+        run: pyinstaller --noconfirm --onefile --console --add-data "templates;templates" --add-data "static;static" --collect-all flask --collect-all spleeter --collect-all librosa --collect-all numpy server.py --name MixAI_EQ_GUI
 
       # 6️⃣ Verifica contenuto dist
       - name: List dist folder
