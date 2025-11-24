@@ -1,5 +1,5 @@
 name: Build Windows executable
- 
+
 on:
   push:
     branches: [ main ]
@@ -25,13 +25,9 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      # 4️⃣ Build exe con PyInstaller
+      # 4️⃣ Build exe con PyInstaller (tutto su una riga per PowerShell)
       - name: Build exe with PyInstaller
-        run: |
-          pyinstaller --noconfirm --onefile --console ^
-          --add-data "templates;templates" ^
-          --add-data "static;static" ^
-          server.py --name MixAI_EQ_GUI
+        run: pyinstaller --noconfirm --onefile --console --add-data "templates;templates" --add-data "static;static" server.py --name MixAI_EQ_GUI
 
       # 5️⃣ Verifica contenuto dist
       - name: List dist folder
