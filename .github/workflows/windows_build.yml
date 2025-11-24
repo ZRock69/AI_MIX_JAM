@@ -25,15 +25,27 @@ jobs:
           pip install -r requirements.txt
           pip install pyinstaller
 
-      # 4️⃣ Build exe con PyInstaller (inclusione corretta di templates e static)
-      - name: Build exe with PyInstaller
-        run: pyinstaller --noconfirm --onefile --console --add-data "${PWD}/templates;templates" --add-data "${PWD}/static;static" server.py --name MixAI_EQ_GUI
+      # 4️⃣ Controllo cartelle
+      - name: Check folders
+        run: dir
 
-      # 5️⃣ Verifica contenuto dist
+      # 5️⃣ Build exe con PyInstaller (inclusione di templates, static e librerie)
+      - name: Build exe with PyInstaller
+        run: |
+          pyinstaller --noconfirm --onefile --console \
+          --add-data "templates;templates" \
+          --add-data "static;static" \
+          --collect-all flask \
+          --collect-all spleeter \
+          --collect-all numpy \
+          --collect-all librosa \
+          server.py --name MixAI_EQ_GUI
+
+      # 6️⃣ Verifica contenuto dist
       - name: List dist folder
         run: dir dist
 
-      # 6️⃣ Upload dell’artefatto exe
+      # 7️⃣ Upload dell’artefatto exe
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
